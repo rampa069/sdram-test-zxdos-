@@ -22,7 +22,7 @@ clock Clock
 (
 	.i       (clock50 ),
 	.o       (clock200),
-	.locked  (        )
+	.locked  (init    )
 );
 
 reg sdrck;
@@ -35,10 +35,10 @@ BUFG BufgO(.I(sdrck), .O(clock));
 sdram SDram
 (
 	.clock   (clock   ),
-//	.init    (init    ),
-
-	.run     (run     ),
-	.fail    (fail    ),
+	.init    (init    ),
+	.ready   (ready   ),
+	.running (running ),
+	.error   (error   ),
 
 	.sdramCs (sdramCs ),
 	.sdramRas(sdramRas),
@@ -56,9 +56,9 @@ reg[23:0] bc; wire blink = bc[23];
 always @(posedge clock) bc <= bc+24'd1;
 
 reg[27:0] oc; wire on = !oc[27];
-always @(posedge fail, posedge clock) if(fail) oc <= 28'd0; else if(on) oc <= oc+28'd1;
+always @(posedge error, posedge clock) if(error) oc <= 28'd0; else if(on) oc <= oc+28'd1;
 
-assign led = { run^(on&blink), ~run^(on&blink) };
+assign led = { ready&(running^(on&blink)), ready&(~running^(on&blink)) };
 
 assign sdramCk = sdrck;
 assign sdramCe = 1'b1;
