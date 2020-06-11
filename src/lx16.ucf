@@ -1,0 +1,65 @@
+#
+# LX16-2 board
+#
+
+# Clock #######################################################################
+
+NET clock50        LOC="A10" | IOSTANDARD = LVCMOS33 | PERIOD = 20ns;
+
+# Buttons #####################################################################
+
+#ET button<1>      LOC="R7" | IOSTANDARD = LVCMOS33; # SW3
+#ET button<0>      LOC="T8" | IOSTANDARD = LVCMOS33; # SW2
+
+# LEDs ########################################################################
+
+NET led<1>         LOC="R9" | IOSTANDARD = LVCMOS33; # D3
+NET led<0>         LOC="T9" | IOSTANDARD = LVCMOS33; # D1
+
+# SDRAM #######################################################################
+
+NET sdramCk        LOC="H1" | IOSTANDARD = LVCMOS33;
+NET sdramCe        LOC="J1" | IOSTANDARD = LVCMOS33;
+NET sdramCs        LOC="J3" | IOSTANDARD = LVCMOS33;
+NET sdramCas       LOC="H3" | IOSTANDARD = LVCMOS33;
+NET sdramRas       LOC="J4" | IOSTANDARD = LVCMOS33;
+NET sdramWe        LOC="G3" | IOSTANDARD = LVCMOS33;
+
+NET sdramBa<1>     LOC="K2" | IOSTANDARD = LVCMOS33;
+NET sdramBa<0>     LOC="K3" | IOSTANDARD = LVCMOS33;
+
+NET sdramA<12>     LOC="K1" | IOSTANDARD = LVCMOS33;
+NET sdramA<11>     LOC="L1" | IOSTANDARD = LVCMOS33;
+NET sdramA<10>     LOC="L3" | IOSTANDARD = LVCMOS33;
+NET sdramA<9>      LOC="M1" | IOSTANDARD = LVCMOS33;
+NET sdramA<8>      LOC="N1" | IOSTANDARD = LVCMOS33;
+NET sdramA<7>      LOC="P1" | IOSTANDARD = LVCMOS33;
+NET sdramA<6>      LOC="P2" | IOSTANDARD = LVCMOS33;
+NET sdramA<5>      LOC="R1" | IOSTANDARD = LVCMOS33;
+NET sdramA<4>      LOC="R2" | IOSTANDARD = LVCMOS33;
+NET sdramA<3>      LOC="N3" | IOSTANDARD = LVCMOS33;
+NET sdramA<2>      LOC="M4" | IOSTANDARD = LVCMOS33;
+NET sdramA<1>      LOC="M3" | IOSTANDARD = LVCMOS33;
+NET sdramA<0>      LOC="L4" | IOSTANDARD = LVCMOS33;
+
+NET sdramDqm<1>    LOC="H2" | IOSTANDARD = LVCMOS33;
+NET sdramDqm<0>    LOC="F3" | IOSTANDARD = LVCMOS33;
+
+NET sdramD<15>     LOC="B1" | IOSTANDARD = LVCMOS33;
+NET sdramD<14>     LOC="C1" | IOSTANDARD = LVCMOS33;
+NET sdramD<13>     LOC="D1" | IOSTANDARD = LVCMOS33;
+NET sdramD<12>     LOC="E2" | IOSTANDARD = LVCMOS33;
+NET sdramD<11>     LOC="E1" | IOSTANDARD = LVCMOS33;
+NET sdramD<10>     LOC="F2" | IOSTANDARD = LVCMOS33;
+NET sdramD<9>      LOC="F1" | IOSTANDARD = LVCMOS33;
+NET sdramD<8>      LOC="G1" | IOSTANDARD = LVCMOS33;
+NET sdramD<7>      LOC="E3" | IOSTANDARD = LVCMOS33;
+NET sdramD<6>      LOC="D3" | IOSTANDARD = LVCMOS33;
+NET sdramD<5>      LOC="C2" | IOSTANDARD = LVCMOS33;
+NET sdramD<4>      LOC="C3" | IOSTANDARD = LVCMOS33;
+NET sdramD<3>      LOC="B2" | IOSTANDARD = LVCMOS33;
+NET sdramD<2>      LOC="B3" | IOSTANDARD = LVCMOS33;
+NET sdramD<1>      LOC="A2" | IOSTANDARD = LVCMOS33;
+NET sdramD<0>      LOC="A3" | IOSTANDARD = LVCMOS33;
+
+###############################################################################
