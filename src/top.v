@@ -21,14 +21,10 @@ module top
 clock Clock
 (
 	.i       (clock50 ),
-	.o       (clock200),
+	.o       (clock   ),
+	.sdramCk (sdramCk ),
 	.locked  (init    )
 );
-
-reg sdrck;
-
-always @(posedge clock200) sdrck <= ~sdrck;
-BUFG BufgO(.I(sdrck), .O(clock));
 
 //-----------------------------------------------------------------------------
 
@@ -50,6 +46,8 @@ sdram SDram
 	.sdramA  (sdramA  )
 );
 
+assign sdramCe = 1'b1;
+
 //-----------------------------------------------------------------------------
 
 reg[23:0] bc; wire blink = bc[23];
@@ -59,9 +57,6 @@ reg[27:0] oc; wire on = !oc[27];
 always @(posedge error, posedge clock) if(error) oc <= 28'd0; else if(on) oc <= oc+28'd1;
 
 assign led = { ready&(running^(on&blink)), ready&(~running^(on&blink)) };
-
-assign sdramCk = sdrck;
-assign sdramCe = 1'b1;
 
 //-------------------------------------------------------------------------------------------------
 endmodule

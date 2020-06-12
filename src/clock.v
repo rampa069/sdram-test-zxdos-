@@ -4,6 +4,7 @@ module clock
 (
 	input         i,
 	output        o,
+	output        sdramCk,
 	output        locked
 );
 //-------------------------------------------------------------------------------------------------
@@ -14,7 +15,7 @@ DCM_SP #
 (
 	.CLKIN_PERIOD          (20.000),
 	.CLKFX_DIVIDE          ( 1    ),
-	.CLKFX_MULTIPLY        ( 4    )
+	.CLKFX_MULTIPLY        ( 2    )  // 100 MHz
 )
 Dcm
 (
@@ -40,7 +41,19 @@ Dcm
 );
 
 BUFG BufgFB(.I(c0), .O(fb));
-BUFG BufgO(.I(co), .O(o));
+BUFG Bufg000(.I(co), .O(o));
+
+ODDR2 oddr2
+(
+	.Q       (sdramCk), // 1-bit DDR output data
+	.C0      ( o     ), // 1-bit clock input
+	.C1      (~o     ), // 1-bit clock input
+	.CE      (1'b1   ), // 1-bit clock enable input
+	.D0      (1'b1   ), // 1-bit data input (associated with C0)
+	.D1      (1'b0   ), // 1-bit data input (associated with C1)
+	.R       (1'b0   ), // 1-bit reset input
+	.S       (1'b0   )  // 1-bit set input
+);
 
 //-------------------------------------------------------------------------------------------------
 endmodule

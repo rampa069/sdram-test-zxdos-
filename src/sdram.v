@@ -63,10 +63,10 @@ begin
 		case(count)
 		// write
 		 0: ACTIVE(addr[23:22], addr[21:9]);			// 32    ACTIVE: bank = 0, row = 0, wait 2T
-		 3: WRITE(2'b00, di, 2'b00, addr[8:0], 1'b0);	// 35    WRITE: dqm = 00, data, bank = 0, col = 0, wait CL
+		 3: WRITE(2'b00, di, 2'b00, addr[8:0], 1'b1);	// 35    WRITE: dqm = 00, data, bank = 0, col = 0, wait CL
 		// read
 		 8: ACTIVE(addr[23:22], addr[21:9]);			// 50    ACTIVE: bank = 0, row = 0, wait 2T
-		11: READ(2'b00, 2'b00, addr[8:0], 1'b0);		// 53    READ, dqm = 00, bank = 0, col = 0, wait CL
+		11: READ(2'b00, 2'b00, addr[8:0], 1'b1);		// 53    READ, dqm = 00, bank = 0, col = 0, wait CL
 		14: error <= sdramD != di; // || &addr;
 		// next
 		30: di  <= di+16'd1;
