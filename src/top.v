@@ -5,16 +5,17 @@ module top
 	input  wire       clock50,
 //	input  wire[ 1:0] button,
 	output wire[ 1:0] led,
-	output wire       sdramCk,
-	output wire       sdramCe,
-	output wire       sdramCs,
-	output wire       sdramWe,
-	output wire       sdramRas,
-	output wire       sdramCas,
-	output wire[ 1:0] sdramDqm,
-	inout  wire[15:0] sdramD,
-	output wire[ 1:0] sdramBa,
-	output wire[12:0] sdramA
+	output wire       SDRAM_CLK,
+	output wire       SDRAM_CKE,
+	output wire       SDRAM_nCS,
+	output wire       SDRAM_nWE,
+	output wire       SDRAM_nRAS,
+	output wire       SDRAM_nCAS,
+	output wire       SDRAM_DQMH,
+	output wire       SDRAM_DQML,
+	inout  wire[15:0] SDRAM_DQ,
+	output wire[ 1:0] SDRAM_BA,
+	output wire[12:0] SDRAM_A
 );
 //-------------------------------------------------------------------------------------------------
 
@@ -22,7 +23,7 @@ clock Clock
 (
 	.i       (clock50 ),
 	.o       (clock   ),
-	.sdramCk (sdramCk ),
+	.sdramCk (SDRAM_CLK ),
 	.locked  (init    )
 );
 
@@ -36,17 +37,17 @@ sdram SDram
 	.running (running ),
 	.error   (error   ),
 
-	.sdramCs (sdramCs ),
-	.sdramRas(sdramRas),
-	.sdramCas(sdramCas),
-	.sdramWe (sdramWe ),
-	.sdramDqm(sdramDqm),
-	.sdramD  (sdramD  ),
-	.sdramBa (sdramBa ),
-	.sdramA  (sdramA  )
+	.sdramCs (SDRAM_nCS ),
+	.sdramRas(SDRAM_nRAS),
+	.sdramCas(SDRAM_nCAS),
+	.sdramWe (SDRAM_nWE),
+	.sdramDqm({SDRAM_DQMH,SDRAM_DQML}),
+	.sdramD  (SDRAM_DQ ),
+	.sdramBa (SDRAM_BA ),
+	.sdramA  (SDRAM_A  )
 );
 
-assign sdramCe = 1'b1;
+assign SDRAM_CKE = 1'b1;
 
 //-----------------------------------------------------------------------------
 
